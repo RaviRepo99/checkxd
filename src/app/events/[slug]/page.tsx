@@ -25,7 +25,7 @@ export async function generateMetadata({
   const {slug} = await params;
   const event = await findEventBySlug(slug);
   if (!event) {
-    return {title: 'Event not found | CITC'};
+    return {title: 'Event not found | CCRC IT CLUB'};
   }
 
   const plain = event.description

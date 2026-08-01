@@ -6,8 +6,8 @@ export const contentType = 'image/png';
 
 export default function Image() {
   return renderOgImage({
-    title: 'Meet the CITC Team',
-    subtitle: 'Board of Directors, executives, and advisors at NCIT',
+    title: 'Meet the CCRC IT CLUB Team',
+    subtitle: 'Board of Directors, executives, and advisors at CCRC',
     label: 'Team',
   });
 }

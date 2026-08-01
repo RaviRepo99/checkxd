@@ -20,12 +20,12 @@ export async function generateMetadata({
   const {year} = await params;
   const yearNum = Number(year);
   if (!Number.isFinite(yearNum)) {
-    return {title: 'Team | CITC'};
+    return {title: 'Team | CCRC IT CLUB'};
   }
 
   return createPageMetadata({
-    title: `CITC Team ${yearNum}`,
-    description: `Meet the CITC ${yearNum} roster — board members, executives, and advisors at Nepal College of Information Technology.`,
+    title: `CCRC IT CLUB Team ${yearNum}`,
+    description: `Meet the CCRC IT CLUB ${yearNum} roster — board members, executives, and advisors at Nepal College of Information Technology.`,
     path: `/team/${yearNum}`,
     ogImagePath: `/team/${yearNum}/opengraph-image`,
   });

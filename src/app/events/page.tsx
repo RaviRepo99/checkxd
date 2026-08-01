@@ -8,9 +8,9 @@ import EventsClient from './EventsClient';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'Events | CITC',
+  title: 'Events - CCRC IT CLUB',
   description:
-    'Workshops, competitions, and club events from the Computer Engineering Innovation & Tech Club at NCIT.',
+    'Workshops, competitions, and club events from the Computer Science Innovation & Tech Club at CCRC.',
   path: '/events',
   ogImagePath: '/events/opengraph-image',
 });

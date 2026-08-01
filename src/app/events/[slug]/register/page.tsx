@@ -25,12 +25,12 @@ export async function generateMetadata({
   const {slug} = await params;
   const event = await findEventBySlug(slug);
   if (!event) {
-    return {title: 'Event not found | CITC'};
+    return {title: 'Event not found | CCRC IT CLUB'};
   }
 
   return createPageMetadata({
-    title: `Register for ${event.title} | CITC`,
-    description: `Register for ${event.title} - Computer Engineering Innovation & Tech Club (CITC)`,
+    title: `Register for ${event.title} | CCRC IT CLUB`,
+    description: `Register for ${event.title} - Computer Science Innovation & Tech Club (CCRC IT CLUB)`,
     path: `${eventPath(event)}/register`,
   });
 }

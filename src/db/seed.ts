@@ -105,7 +105,7 @@ async function seed() {
       date: '2026-02-02',
       time: '6 Days (2 Hours Daily)',
       location: 'NCIT Room:125',
-      description: '## Introduction\n\nThe **Computer Engineering Innovation and Tech Club (CITC)**, in collaboration with the Department of Computer Engineering, NCIT, presents **"IoT Hardware Workshop"**, an intensive 6-day workshop designed to bridge the gap between theoretical knowledge and practical hardware implementation.',
+      description: '## Introduction\n\nThe **Computer Science Innovation and Tech Club **, in collaboration with the Department of Computer Engineering, NCIT, presents **"IoT Hardware Workshop"**, an intensive 6-day workshop designed to bridge the gap between theoretical knowledge and practical hardware implementation.',
       image: s('event/003/IoTExpo2082.png'),
       status: 'past' as const,
       academicYear: 2026,

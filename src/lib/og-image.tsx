@@ -12,7 +12,7 @@ type OgImageOptions = {
 export function renderOgImage({
   title,
   subtitle,
-  label = 'CITC · NCIT',
+  label = 'IT CLUB · CCRC',
   imageUrl,
 }: OgImageOptions) {
   const displayTitle =

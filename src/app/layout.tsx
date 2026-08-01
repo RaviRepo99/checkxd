@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   manifest: '/favicon/site.webmanifest',
   appleWebApp: {
-    title: 'CITC',
+    title: 'CCRC IT CLUB',
     statusBarStyle: 'default',
   },
 };

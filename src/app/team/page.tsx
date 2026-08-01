@@ -8,9 +8,9 @@ import TeamClient from './TeamClient';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'Meet the Team | CITC',
+  title: 'Meet the Team | CCRC IT CLUB',
   description:
-    'Meet CITC board members, executives, and advisors at Nepal College of Information Technology. Browse rosters by academic year.',
+    'Meet CCRC IT CLUB board members, executives, and advisors at CCRC. Browse rosters by academic year.',
   path: '/team',
   ogImagePath: '/team/opengraph-image',
 });
