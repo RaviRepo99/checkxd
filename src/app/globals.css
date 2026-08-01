@@ -65,6 +65,8 @@ body {
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Centered page width on large / ultrawide screens */

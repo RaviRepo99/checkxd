@@ -61,16 +61,16 @@ export default function HomeAbout() {
   return (
     <motion.section
       ref={ref}
-      initial={shouldReduceMotion ? false : {opacity: 0, y: 60, filter: 'blur(10px)'}}
+      initial={shouldReduceMotion ? false : {opacity: 0, filter: 'blur(10px)'}}
       animate={
         shouldReduceMotion ?
-          {opacity: 1, y: 0, filter: 'blur(0px)'} :
+          {opacity: 1, filter: 'blur(0px)'} :
           isInView ?
-            {opacity: 1, y: 0, filter: 'blur(0px)'} :
-            {opacity: 0, y: 60, filter: 'blur(10px)'}
+            {opacity: 1, filter: 'blur(0px)'} :
+            {opacity: 0, filter: 'blur(10px)'}
       }
       transition={shouldReduceMotion ? undefined : {duration: 0.8, ease: easeOut}}
-      style={{willChange: 'transform, opacity, filter'}}
+      style={{willChange: 'opacity, filter'}}
       className="relative -mt-20 overflow-hidden bg-white pt-4 text-slate-900 sm:-mt-28 sm:pt-6 dark:bg-slate-900 dark:text-white"
     >
       <div

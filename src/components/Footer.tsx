@@ -44,7 +44,7 @@ export default function Footer() {
             <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-md">
               {SITE_CONFIG.description}
             </p>
-            <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex flex-wrap items-center justify-center gap-2.5 sm:justify-start">
               {Object.entries(SITE_CONFIG.social).map(([platform, url]) => {
                 const Icon = socialIcons[platform];
                 if (!Icon) return null;
