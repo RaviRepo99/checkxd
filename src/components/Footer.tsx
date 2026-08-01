@@ -8,6 +8,13 @@ const socialIcons: Record<string, React.ElementType> = {
   facebook: Facebook,
 };
 
+const socialButtonClassName: Record<string, string> = {
+  instagram:
+    'border-pink-200 bg-gradient-to-br from-pink-500/10 via-rose-500/10 to-orange-400/10 text-pink-600 hover:border-pink-400 hover:bg-gradient-to-br hover:from-pink-500 hover:via-rose-500 hover:to-orange-500 hover:text-white dark:border-pink-400/20 dark:from-pink-500/20 dark:via-rose-500/20 dark:to-orange-400/20 dark:text-pink-300 dark:hover:border-pink-400/50',
+  facebook:
+    'border-sky-200 bg-sky-500/10 text-sky-700 hover:border-sky-400 hover:bg-sky-600 hover:text-white dark:border-sky-400/20 dark:bg-sky-500/20 dark:text-sky-300 dark:hover:border-sky-400/50',
+};
+
 const navLinks = [
   {name: 'Home', path: '/'},
   {name: 'Events', path: '/events'},
@@ -44,17 +51,19 @@ export default function Footer() {
             <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-md">
               {SITE_CONFIG.description}
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-2.5 sm:justify-start">
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
               {Object.entries(SITE_CONFIG.social).map(([platform, url]) => {
                 const Icon = socialIcons[platform];
                 if (!Icon) return null;
+                const buttonClass = socialButtonClassName[platform] ??
+                  'border-slate-200 bg-slate-50 text-slate-700 hover:border-[var(--color-citc-blue)] hover:bg-[var(--color-citc-blue)] hover:text-white dark:border-white/10 dark:bg-white/5 dark:text-slate-200';
                 return (
                   <a
                     key={platform}
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-transparent text-slate-700 transition-colors duration-150 hover:bg-slate-50 hover:text-[var(--color-citc-blue)] dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:bg-white/5 dark:hover:text-[var(--color-citc-blue)]"
+                    className={`group flex h-11 w-11 items-center justify-center rounded-full border shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md sm:h-10 sm:w-10 ${buttonClass}`}
                     aria-label={platform}
                   >
                     <Icon size={18} />
