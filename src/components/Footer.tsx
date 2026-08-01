@@ -63,10 +63,10 @@ export default function Footer() {
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group flex h-11 w-11 items-center justify-center rounded-full border shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md sm:h-10 sm:w-10 ${buttonClass}`}
+                    className={`group flex h-12 w-12 min-w-[44px] items-center justify-center rounded-full border border-slate-200 bg-white text-slate-800 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-50 hover:shadow-md dark:border-white/10 dark:bg-slate-900/80 dark:text-slate-100 dark:hover:bg-slate-800 ${buttonClass}`}
                     aria-label={platform}
                   >
-                    <Icon size={18} />
+                    <Icon size={20} />
                   </a>
                 );
               })}
