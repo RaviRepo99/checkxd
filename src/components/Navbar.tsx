@@ -170,7 +170,7 @@ export default function Navbar() {
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="flex items-center justify-center px-8 py-4 bg-black text-white font-bold rounded-md w-fit min-w-[200px] border border-slate-800 shadow-sm transform-gpu transition-all duration-200 ease-in-out hover:scale-105 hover:bg-slate-900 dark:bg-black dark:text-white dark:border-white/10 dark:hover:bg-slate-950"
                       >
-                        Join Club Now
+                        Become a Member
                       </Link>
                     </motion.div>
                   </motion.div>
