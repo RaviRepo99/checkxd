@@ -154,6 +154,17 @@ export default function RootLayout({
               }
             });`}
         </Script>
+        <Script id="crisp-init" strategy="afterInteractive">
+          {`window.$crisp = window.$crisp || [];
+            window.CRISP_WEBSITE_ID = "237e5d12-47aa-4593-b937-b360f6c2a4d1";
+            (function () {
+              var d = document;
+              var s = d.createElement("script");
+              s.src = "https://client.crisp.chat/l.js";
+              s.async = 1;
+              d.getElementsByTagName("head")[0].appendChild(s);
+            })();`}
+        </Script>
         <ConditionalLayout>{children}</ConditionalLayout>
       </body>
     </html>
