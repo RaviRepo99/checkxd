@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = createPageMetadata({
   title: 'Meet the Team | CITC',
   description:
-    'Meet CITC mentors, executives, and advisors at Nepal College of Information Technology. Browse rosters by academic year.',
+    'Meet CITC board members, executives, and advisors at Nepal College of Information Technology. Browse rosters by academic year.',
   path: '/team',
   ogImagePath: '/team/opengraph-image',
 });

@@ -144,6 +144,16 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col w-full min-w-0 overflow-x-clip bg-white dark:bg-citc-navy transition-colors duration-300">
         <Script src="/scripts/theme-init.js" strategy="beforeInteractive" />
+        <Script id="scroll-reset" strategy="beforeInteractive">
+          {`if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+            window.addEventListener('load', () => {
+              const navEntries = performance.getEntriesByType('navigation');
+              const isReload = navEntries[0]?.type === 'reload' || navEntries[0]?.type === 'navigate';
+              if (isReload) {
+                window.scrollTo(0, 0);
+              }
+            });`}
+        </Script>
         <ConditionalLayout>{children}</ConditionalLayout>
       </body>
     </html>

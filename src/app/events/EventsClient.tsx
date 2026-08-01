@@ -50,11 +50,11 @@ export default function EventsClient({events}: EventsClientProps) {
             <button
               type="button"
               onClick={() => setActiveYear(null)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ease-out border border-black text-black dark:border-white/20 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-citc-blue/70 ${
                 !activeYear ?
-                  'bg-citc-blue text-white' :
-                  'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
-              }`}
+                  'bg-black text-white' :
+                  'bg-white dark:bg-slate-800 hover:bg-black/5 dark:hover:bg-white/10'
+              } hover:-translate-y-[1px]`}
             >
               All Years
             </button>
@@ -63,11 +63,11 @@ export default function EventsClient({events}: EventsClientProps) {
                 key={year}
                 type="button"
                 onClick={() => setActiveYear(year)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ease-out border border-black text-black dark:border-white/20 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-citc-blue/70 ${
                   activeYear === year ?
-                    'bg-citc-blue text-white' :
-                    'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
-                }`}
+                    'bg-black text-white' :
+                    'bg-white dark:bg-slate-800 hover:bg-black/5 dark:hover:bg-white/10'
+                } hover:-translate-y-[1px]`}
               >
                 {year}
               </button>

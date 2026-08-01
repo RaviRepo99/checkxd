@@ -1,6 +1,6 @@
 'use client';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {createBrowserSupabaseClient} from '@/utils/supabase/client';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -10,8 +10,13 @@ export default function LoginClient() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
   const supabase = createBrowserSupabaseClient();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,10 +43,10 @@ export default function LoginClient() {
       <div className="absolute top-6 right-6">
         <ThemeToggle />
       </div>
-      <div className="w-full max-w-md p-8 bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800">
+      <div className={`w-full max-w-md p-8 bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 transition-transform duration-700 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Admin Login</h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-2">Sign in to manage CITC website</p>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">CCRC IT CLUB Admin</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-2">Sign in to manage CCRC IT CLUB website</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-4">
@@ -71,7 +76,7 @@ export default function LoginClient() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-xl transition-colors disabled:opacity-50"
+            className="w-full py-3 bg-black text-white font-bold rounded-xl transition-all duration-300 hover:bg-slate-800 disabled:opacity-50"
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>

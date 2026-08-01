@@ -25,7 +25,7 @@ export async function generateMetadata({
 
   return createPageMetadata({
     title: `CITC Team ${yearNum}`,
-    description: `Meet the CITC ${yearNum} roster — mentors, executives, and advisors at Nepal College of Information Technology.`,
+    description: `Meet the CITC ${yearNum} roster — board members, executives, and advisors at Nepal College of Information Technology.`,
     path: `/team/${yearNum}`,
     ogImagePath: `/team/${yearNum}/opengraph-image`,
   });

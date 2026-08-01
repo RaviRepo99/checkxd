@@ -16,7 +16,7 @@ const EventCard: React.FC<EventCardProps> = ({event}) => {
   const showRegister = (event.status === 'running' || event.status === 'upcoming');
 
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-citc-navy border border-slate-200 dark:border-white/10 shadow-sm transition-colors hover:border-citc-blue/30">
+    <div className="group relative flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-citc-navy border border-black/10 dark:border-white/10 shadow-sm transition-all duration-200 ease-out hover:border-black/20">
       <Link href={eventPath(event)} className="block h-full">
         <div className="relative h-48 w-full overflow-hidden">
           <MediaImage
@@ -79,7 +79,7 @@ const EventCard: React.FC<EventCardProps> = ({event}) => {
           <EventRegistrationButton
             href={event.registrationLink}
             eventSlug={eventSlugFromTitle(event.title)}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-citc-blue px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-citc-blue/90 relative z-10"
+            className="group flex w-full items-center justify-center gap-2 rounded-xl bg-citc-blue px-4 py-3 text-sm font-bold text-white transition-transform duration-200 ease-out hover:-translate-y-[1px] hover:scale-[1.01] hover:bg-citc-blue/90 relative z-10"
           />
         </div>
       )}

@@ -12,8 +12,7 @@ async function seed() {
   // Teams
   const teamData = [
     {id: 't_patron', name: 'Patron', year: 2025},
-    {id: 't_mentors_2025', name: 'Mentors', year: 2025},
-    {id: 't_exec_2025', name: 'Executive Committee', year: 2025},
+    {id: 't_exec_2025', name: 'Board of Directors', year: 2025},
     {id: 't_faculty', name: 'Faculty Advisors', year: 2025},
   ];
 
@@ -29,12 +28,12 @@ async function seed() {
   // Members — each has full AVIF + 64px thumb (same as admin upload)
   const memberData = [
     {name: 'Er. Amit Shrivastava', type: 'Patron', title: 'Patron', department: 'HOD, Department of Computer Engineering', email: 'hod.computer@ncit.edu.np', ...seedMemberPhotos('faculty_advisor_amit.avif'), photoVersion: 0, memberYear: 2025, teamId: 't_patron'},
-    {name: 'Manash Dev Bhatta', type: 'Executive', email: 'manash.221224@ncit.edu.np', ...seedMemberPhotos('manash_dev_bhatta.avif'), photoVersion: 0, memberYear: 2025, teamId: 't_mentors_2025', collegeYear: 4, socials: {github: 'https://github.com/dsxmanash', instagram: 'https://www.instagram.com/sunfloweraholic01'}},
-    {name: 'Niraj Bhusal', type: 'Executive', email: 'niraj.221315@ncit.edu.np', ...seedMemberPhotos('niraj_bhusal.avif'), photoVersion: 0, memberYear: 2025, teamId: 't_mentors_2025', collegeYear: 4, socials: {github: 'https://github.com/niraj5511', linkedin: 'https://www.linkedin.com/in/niraj-bhusal-6262b830a/', instagram: 'https://www.instagram.com/niraj_bhusal551'}},
+    {name: 'Manash Dev Bhatta', type: 'Executive', email: 'manash.221224@ncit.edu.np', ...seedMemberPhotos('manash_dev_bhatta.avif'), photoVersion: 0, memberYear: 2025, teamId: 't_exec_2025', collegeYear: 4, socials: {github: 'https://github.com/dsxmanash', instagram: 'https://www.instagram.com/sunfloweraholic01'}},
+    {name: 'Niraj Bhusal', type: 'Executive', email: 'niraj.221315@ncit.edu.np', ...seedMemberPhotos('niraj_bhusal.avif'), photoVersion: 0, memberYear: 2025, teamId: 't_exec_2025', collegeYear: 4, socials: {github: 'https://github.com/niraj5511', linkedin: 'https://www.linkedin.com/in/niraj-bhusal-6262b830a/', instagram: 'https://www.instagram.com/niraj_bhusal551'}},
     {
-      name: 'Pratik Mishra', type: 'Mentor', email: 'pratikmis14@gmail.com',
+      name: 'Pratik Mishra', type: 'Executive', email: 'pratikmis14@gmail.com',
       ...seedMemberPhotos('pratik_mishra.avif'), photoVersion: 0,
-      memberYear: 2025, teamId: 't_mentors_2025', collegeYear: 4,
+      memberYear: 2025, teamId: 't_exec_2025', collegeYear: 4,
       socials: {
         github: 'https://github.com/Retr0-0',
         facebook: 'https://www.facebook.com/Prats8914',

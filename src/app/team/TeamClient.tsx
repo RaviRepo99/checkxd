@@ -119,16 +119,72 @@ export default function TeamClient({
       (m) => m.memberYear === activeYear,
   );
 
-  const displayTeams = sortTeamsForDisplay(
-      teamData.teams.filter((t) => t.year === activeYear),
+  const normalizeTeamName = (teamName: string) => {
+    if (teamName === 'Mentors') return 'Board of Directors';
+    if (teamName === 'Executive Committee') return 'Board of Directors';
+    return teamName;
+  };
+
+  // Build teams for the active year, excluding legacy Mentors groups.
+  const teamsForYear = teamData.teams
+    .filter((t) => t.year === activeYear)
+    .filter((t) => t.name !== 'Mentors' && !t.id.includes('t_mentors'));
+
+  // If there isn't an explicit Patron team but there are Patron members,
+  // create a synthetic Patron team so Patron appears as its own top section.
+  const hasPatronTeam = teamsForYear.some(
+    (t) => t.id.startsWith('t_patron') || t.name === 'Patron',
+  );
+  const patronMembers = filteredMembers.filter(
+    (m) => m.type === 'Patron' || m.teamId.startsWith('t_patron'),
   );
 
+  if (!hasPatronTeam && patronMembers.length > 0) {
+    teamsForYear.unshift({id: `t_patron_${activeYear}`, name: 'Patron', year: activeYear} as Team);
+  }
+
+  const displayTeams = sortTeamsForDisplay(teamsForYear);
+
   const getTeamMembers = (teamId: string) => {
-    const members = filteredMembers.filter((m) => m.teamId === teamId);
-    if (teamId.startsWith('t_exec') || teamId.includes('mentor')) {
-      return sortMembersBySeniorityAndName(members);
+    // Treat patron teams specially: synthetic patron ids start with `t_patron`
+    const isPatronTeam = teamId.startsWith('t_patron');
+
+    const members = filteredMembers.filter((m) => {
+      if (isPatronTeam) {
+        // Include anyone explicitly typed Patron or assigned to a patron team
+        return m.type === 'Patron' || m.teamId === teamId || m.teamId.startsWith('t_patron');
+      }
+      // For non-patron teams, only include members actually assigned to this team
+      // and explicitly exclude Patron-typed members so they only appear in Patron section
+      return m.teamId === teamId && m.type !== 'Patron';
+    });
+
+    // For Board of Directors (exec) teams, enforce insertion order rules:
+    // 1) If an explicit `display_order` / `displayOrder` field exists, use it.
+    // 2) Otherwise use `createdAt` ASC (oldest first).
+    // 3) Fallback to `id` ASC if timestamps are unavailable.
+    if (teamId.startsWith('t_exec')) {
+      return [...members].sort((a, b) => {
+        // support both snake_case and camelCase possible fields
+        const aDisplay = (a as any).display_order ?? (a as any).displayOrder;
+        const bDisplay = (b as any).display_order ?? (b as any).displayOrder;
+        if (aDisplay != null || bDisplay != null) {
+          return (aDisplay ?? 0) - (bDisplay ?? 0);
+        }
+
+        if (a.createdAt && b.createdAt) {
+          const ta = new Date(a.createdAt).getTime();
+          const tb = new Date(b.createdAt).getTime();
+          return ta - tb;
+        }
+
+        // final fallback to id (serial primary key)
+        return (a.id ?? 0) - (b.id ?? 0);
+      });
     }
-    return [...members].sort((a, b) => a.name.localeCompare(b.name));
+
+    // Preserve source insertion order for non-exec teams.
+    return members;
   };
 
   return (
@@ -146,7 +202,7 @@ export default function TeamClient({
             Meet the Team
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400">
-            Meet the people who run CITC at NCIT. Tap a member for details.
+            Meet the people who run IT CLUB at CCRC. Tap a member for details.
           </p>
         </div>
 
@@ -160,14 +216,12 @@ export default function TeamClient({
               const teamMembers = getTeamMembers(team.id);
               if (teamMembers.length === 0) return null;
 
-              const isSmallTeam = teamMembers.length <= 4;
-
               return (
                 <section key={team.id} id={team.id} className="scroll-mt-32">
                   <div className="flex items-center gap-4 mb-12">
                     <div className="h-px flex-1 bg-slate-200 dark:bg-white/10" />
                     <h2 className="text-2xl md:text-3xl font-bold text-citc-navy dark:text-white text-center px-4 shrink-0">
-                      {team.name}
+                      {normalizeTeamName(team.name)}
                     </h2>
                     <div className="h-px flex-1 bg-slate-200 dark:bg-white/10" />
                   </div>
@@ -177,11 +231,7 @@ export default function TeamClient({
                     initial="hidden"
                     whileInView="visible"
                     viewport={{once: true, margin: '-50px'}}
-                    className={`grid gap-8 ${
-                      isSmallTeam ?
-                        'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto' :
-                        'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-                    }`}
+                    className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 max-w-7xl mx-auto"
                   >
                     {teamMembers.map((member) => (
                       <MemberCard

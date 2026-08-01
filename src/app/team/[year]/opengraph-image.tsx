@@ -12,7 +12,7 @@ export default async function Image({
   const {year} = await params;
   return renderOgImage({
     title: `CITC Team ${year}`,
-    subtitle: 'Mentors, executives, and advisors at NCIT',
+    subtitle: 'Board of Directors, executives, and advisors at NCIT',
     label: 'Team',
   });
 }

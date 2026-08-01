@@ -5,12 +5,18 @@
 
 /** PostgreSQL connection string (server only). */
 export function getDatabaseUrl(): string {
-  const value = process.env.DATABASE_URL;
+  const value =
+    process.env.DATABASE_URL ||
+    process.env.POSTGRES_URL ||
+    process.env.POSTGRES_PRISMA_URL ||
+    process.env.POSTGRES_URL_NON_POOLING ||
+    process.env.POSTGRES_URL_NO_SSL;
+
   if (!value) {
     if (process.env.NEXT_PHASE === 'phase-production-build' || process.env.CI) {
       return 'postgresql://placeholder-user:placeholder-pass@localhost:5432/placeholder-db';
     }
-    throw new Error('Missing required environment variable: DATABASE_URL');
+    throw new Error('Missing required environment variable: DATABASE_URL (or a Vercel/Postgres-compatible URL variable)');
   }
   return value;
 }

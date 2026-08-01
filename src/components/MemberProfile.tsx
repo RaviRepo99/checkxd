@@ -15,12 +15,13 @@ export default function MemberProfile({member, team}: MemberProfileProps) {
   const photoUrl = getMemberPhotoUrl(member);
   const profileUrl = absoluteUrl(memberProfilePath(member));
 
+  const displayType = member.type === 'Mentor' ? 'Executive' : member.type;
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
     'name': member.name,
     'email': member.email,
-    'jobTitle': member.type,
+    'jobTitle': displayType,
     'url': profileUrl,
     'image': photoUrl ? absoluteUrl(photoUrl.split('?')[0] ?? photoUrl) : undefined,
     'affiliation': {

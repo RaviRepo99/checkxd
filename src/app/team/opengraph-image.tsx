@@ -7,7 +7,7 @@ export const contentType = 'image/png';
 export default function Image() {
   return renderOgImage({
     title: 'Meet the CITC Team',
-    subtitle: 'Mentors, executives, and advisors at NCIT',
+    subtitle: 'Board of Directors, executives, and advisors at NCIT',
     label: 'Team',
   });
 }

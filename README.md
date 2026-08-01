@@ -136,7 +136,7 @@ Postgres runs on port `5432` with credentials from `docker-compose.yml`. Apply s
 | `/join` | Tally membership embed |
 | `/register/ai` | AI competition page + countdown + Tally |
 
-Team display order: **Patron/Faculty advisors → Mentors → Executive Committee**. Executives are sorted by college year (senior first), then name.
+Team display order: **Patron/Faculty advisors → Board of Directors**. Executives are sorted by college year (senior first), then name.
 
 ---
 

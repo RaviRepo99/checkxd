@@ -86,7 +86,7 @@ src/
 
 - Slugs: `memberSlugFromName()` in `@/lib/member-slug`.
 - Profile path: `/team/{memberYear}/{slug}` via `memberProfilePath()`.
-- Sorting: `@/lib/team-order` (advisors → mentors → executives; senior college year first).
+- Sorting: `@/lib/team-order` (advisors → board of directors; senior college year first).
 
 ## SEO & cache
 

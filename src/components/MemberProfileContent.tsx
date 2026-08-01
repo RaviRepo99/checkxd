@@ -19,12 +19,18 @@ export default function MemberProfileContent({
   team,
 }: MemberProfileContentProps) {
   const photoUrl = getMemberPhotoUrl(member);
+  const displayType = member.type === 'Mentor' ? 'Executive' : member.type;
+  const normalizeTeamName = (teamName: string) => {
+    if (teamName === 'Mentors') return 'Board of Directors';
+    if (teamName === 'Executive Committee') return 'Board of Directors';
+    return teamName;
+  };
   const roleLine =
     member.title ||
     member.department ||
     (member.collegeYear ?
-      `Year ${member.collegeYear} · ${member.type}` :
-      member.type);
+      `Year ${member.collegeYear} · ${displayType}` :
+      displayType);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-8 items-start">
@@ -46,7 +52,7 @@ export default function MemberProfileContent({
       <div className="space-y-5 min-w-0">
         <header>
           <p className="text-xs font-semibold uppercase tracking-wider text-citc-blue mb-1.5">
-            {team?.name ?? 'CITC'} · {member.memberYear}
+            {team ? normalizeTeamName(team.name) : 'CITC'} · {member.memberYear}
           </p>
           <h2
             id="member-profile-title"
@@ -62,7 +68,7 @@ export default function MemberProfileContent({
         <div className="flex flex-wrap gap-2.5">
           <a
             href={`mailto:${member.email}`}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-citc-blue text-white text-sm font-semibold hover:bg-citc-blue/90 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors"
           >
             <Mail className="w-4 h-4" />
             Email
@@ -72,13 +78,18 @@ export default function MemberProfileContent({
               href={normalizeSocialUrl(member.socials.website)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:border-citc-blue transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-200 text-sm font-semibold hover:border-citc-blue transition-colors"
             >
               <Globe className="w-4 h-4" />
               Website
             </a>
           )}
         </div>
+        {member.email ? (
+          <p className="mt-3 text-sm text-slate-500 dark:text-slate-400 break-all">
+            {member.email}
+          </p>
+        ) : null}
 
         {(member.socials?.github ||
           member.socials?.linkedin ||

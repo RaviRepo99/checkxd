@@ -20,13 +20,15 @@ export default function EventRegistrationButton({
 }: EventRegistrationButtonProps) {
   const isTallyLink = href?.includes('tally.so');
 
+  const arrowClass = `${iconClassName} transition-transform duration-200 ease-out group-hover:translate-x-1`;
+
   if (isTallyLink && eventSlug) {
     return (
       <Link
         href={`/events/${eventSlug}/register`}
         className={className}
       >
-        {label} <ArrowRight className={iconClassName} />
+        {label} <ArrowRight className={arrowClass} />
       </Link>
     );
   }
@@ -38,7 +40,7 @@ export default function EventRegistrationButton({
       rel="noopener noreferrer"
       className={className}
     >
-      {label} <ArrowRight className={iconClassName} />
+      {label} <ArrowRight className={arrowClass} />
     </a>
   );
 }
