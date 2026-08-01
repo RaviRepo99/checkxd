@@ -106,7 +106,7 @@ export default function Navbar() {
                   className="group px-6 py-2.5 bg-black text-white font-semibold rounded-md border border-slate-800 shadow-sm transform-gpu transition-all duration-300 ease-out hover:-translate-y-[2px] hover:scale-[1.03] hover:shadow-lg dark:bg-black dark:text-white dark:border-white/10 dark:hover:bg-slate-950 active:scale-95"
                 >
                   <span className="relative flex items-center gap-2">
-                    Join Club <ChevronRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
+                    Become a Member <ChevronRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
                   </span>
                 </Link>
               </motion.div>
