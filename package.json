@@ -22,6 +22,7 @@
     "@jsquash/avif": "^2.1.1",
     "@supabase/ssr": "^0.10.3",
     "@supabase/supabase-js": "^2.106.2",
+    "@vercel/analytics": "^2.0.1",
     "drizzle-orm": "^1.0.0-rc.3",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.17.0",
