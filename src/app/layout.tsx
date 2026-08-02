@@ -156,7 +156,7 @@ export default function RootLayout({
         </Script>
         <Script id="crisp-init" strategy="afterInteractive">
           {`window.$crisp = window.$crisp || [];
-            window.CRISP_WEBSITE_ID = "237e5d12-47aa-4593-b937-b360f6c2a4d1";
+            window.CRISP_WEBSITE_ID = "bfaaf4a3-4487-4294-8650-66b641d2f4e9";
             (function () {
               var d = document;
               var s = d.createElement("script");
