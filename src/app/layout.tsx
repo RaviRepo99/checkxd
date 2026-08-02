@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
 import Script from 'next/script';
+import {Analytics} from '@vercel/analytics/next';
 import ConditionalLayout from '@/components/ConditionalLayout';
 import {defaultSiteMetadata, getSiteUrl} from '@/lib/seo';
 import {SITE_CONFIG} from '@/lib/site-config';
@@ -166,6 +167,7 @@ export default function RootLayout({
             })();`}
         </Script>
         <ConditionalLayout>{children}</ConditionalLayout>
+        <Analytics />
       </body>
     </html>
   );
