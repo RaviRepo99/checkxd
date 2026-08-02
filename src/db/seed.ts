@@ -91,7 +91,7 @@ async function seed() {
       image: s('event/002/top_image.jpg'),
       status: 'past' as const,
       academicYear: 2026,
-      registrationLink: 'https://citc.ncit.edu.np/register/ai',
+      registrationLink: 'https://ccrcitclub.com/register/ai',
       tags: ['AI', 'Competition', 'Prompt Engineering', 'Creativity'],
       gallery: [
         s('event/002/top_image.jpg'),

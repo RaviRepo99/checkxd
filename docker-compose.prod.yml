@@ -11,12 +11,12 @@ services:
     labels:
       - "traefik.enable=true"
       # HTTPS Configuration
-      - "traefik.http.routers.citc-web.rule=Host(`citc.ncit.edu.np`)"
+      - "traefik.http.routers.citc-web.rule=Host(`ccrcitclub.com`)"
       - "traefik.http.routers.citc-web.entrypoints=websecure"
       - "traefik.http.routers.citc-web.tls.certresolver=myresolver"
       - "traefik.http.services.citc-web.loadbalancer.server.port=3000"
       # HTTP Redirect to HTTPS
-      - "traefik.http.routers.citc-web-http.rule=Host(`citc.ncit.edu.np`)"
+      - "traefik.http.routers.citc-web-http.rule=Host(`ccrcitclub.com`)"
       - "traefik.http.routers.citc-web-http.entrypoints=web"
       - "traefik.http.routers.citc-web-http.middlewares=redirect-to-https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"

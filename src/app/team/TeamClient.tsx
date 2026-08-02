@@ -11,10 +11,7 @@ import {
   memberSlugFromName,
 } from '@/lib/member-slug';
 import {sortYearsDesc} from '@/lib/years';
-import {
-  sortMembersBySeniorityAndName,
-  sortTeamsForDisplay,
-} from '@/lib/team-order';
+import {sortTeamsForDisplay} from '@/lib/team-order';
 import type {Member, Team, TeamData} from '@/types';
 
 const gridContainerVariants = {
@@ -127,16 +124,16 @@ export default function TeamClient({
 
   // Build teams for the active year, excluding legacy Mentors groups.
   const teamsForYear = teamData.teams
-    .filter((t) => t.year === activeYear)
-    .filter((t) => t.name !== 'Mentors' && !t.id.includes('t_mentors'));
+      .filter((t) => t.year === activeYear)
+      .filter((t) => t.name !== 'Mentors' && !t.id.includes('t_mentors'));
 
   // If there isn't an explicit Patron team but there are Patron members,
   // create a synthetic Patron team so Patron appears as its own top section.
   const hasPatronTeam = teamsForYear.some(
-    (t) => t.id.startsWith('t_patron') || t.name === 'Patron',
+      (t) => t.id.startsWith('t_patron') || t.name === 'Patron',
   );
   const patronMembers = filteredMembers.filter(
-    (m) => m.type === 'Patron' || m.teamId.startsWith('t_patron'),
+      (m) => m.type === 'Patron' || m.teamId.startsWith('t_patron'),
   );
 
   if (!hasPatronTeam && patronMembers.length > 0) {

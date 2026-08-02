@@ -2,7 +2,7 @@
 
 Official website for **CITC** (Computer Engineering Innovation & Tech Club) at Nepal College of Information Technology (NCIT).
 
-**Live site:** [citc.ncit.edu.np](https://citc.ncit.edu.np)  
+**Live site:** [ccrcitclub.com](https://ccrcitclub.com)  
 **Tagline:** Innovate. Connect. Transform.
 
 ---
@@ -76,7 +76,7 @@ Copy `.env.example` to `.env.local` for local development (not committed):
 | `DATABASE_URL` | Yes | PostgreSQL connection (Drizzle + seed) |
 | `NEXT_PUBLIC_SUPABASE_URL` | Yes | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Yes | Supabase anon/publishable key |
-| `NEXT_PUBLIC_SITE_URL` | No | Canonical site URL for SEO/OG (defaults to `https://citc.ncit.edu.np`) |
+| `NEXT_PUBLIC_SITE_URL` | No | Canonical site URL for SEO/OG (defaults to `https://ccrcitclub.com`) |
 | `GHCR_USER` / `GHCR_TOKEN` | Deploy only | Pull production image from GitHub Container Registry |
 | `LETSENCRYPT_EMAIL` | Deploy only | SSL certificate contact (Traefik) |
 
@@ -202,7 +202,7 @@ Production runs as a Docker container from **GitHub Container Registry**:
 ./prod-deploy.sh
 ```
 
-`docker-compose.prod.yml` pulls the image and registers it with **Traefik** for HTTPS at `citc.ncit.edu.np`.
+`docker-compose.prod.yml` pulls the image and registers it with **Traefik** for HTTPS at `ccrcitclub.com`.
 
 Vercel is also supported (`vercel.json` sets build memory). Set the same env vars in the Vercel project dashboard.
 

@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "NODE_OPTIONS='--max-old-space-size=6144' next build --webpack",
+    "build": "cross-env NODE_OPTIONS=--max-old-space-size=6144 next build --webpack",
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -40,6 +40,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "cross-env": "^10.1.0",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^1.0.0-rc.3",
     "eslint": "^9.39.4",

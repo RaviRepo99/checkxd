@@ -1,9 +1,9 @@
 export const SITE_CONFIG = {
   name: 'CCRC IT CLUB',
   fullName: 'Computer Science, Innovation & Information Technology Club',
-  url: 'https://ccrcitclub.digital',
+  url: 'https://ccrcitclub.com',
   description:
-    'Computer Science Innovation & IT CLUB at Capital College and Research Center. Empowering Students. Inspiring Innovation.',
+    'Official website of CCRC IT CLUB. Explore events, innovation, AI competitions, workshops, and student projects.',
   tagline: 'Empowering Students. Inspiring Innovation.',
   logo: '/favicon/favicon.ico',
   email: 'ccrcitclub2077@gmail.com',

@@ -76,8 +76,8 @@ const MemberCard: React.FC<MemberCardProps> = ({
           </>
         ) : (
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-300 to-slate-400 dark:from-slate-700 dark:to-slate-800">
-            <User className="w-28 h-28 text-slate-400 dark:text-slate-500" />
-          </div>
+              <User className="w-28 h-28 text-slate-400 dark:text-slate-500" />
+            </div>
         )}
 
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent" />
