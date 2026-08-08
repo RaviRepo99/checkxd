@@ -6,7 +6,7 @@ export const SITE_CONFIG = {
     'Official website of CCRC IT CLUB. Explore events, innovation, AI competitions, workshops, and student projects.',
   tagline: 'Empowering Students. Inspiring Innovation.',
   logo: '/favicon/favicon.ico',
-  email: 'ccrcitclub2077@gmail.com',
+  email: 'contact@ccrcitclub.com',
   foundingDate: '2025',
   location: {
     country: 'NP',
