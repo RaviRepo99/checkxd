@@ -178,6 +178,7 @@ export default function DonationPageClient() {
       const response = await fetch('/api/donations', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
+        signal: AbortSignal.timeout(30000),
         body: JSON.stringify({
           step: 'submit',
           fullName: form.fullName.trim(),
