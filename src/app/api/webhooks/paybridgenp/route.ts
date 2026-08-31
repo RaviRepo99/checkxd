@@ -59,7 +59,9 @@ export async function POST(request: Request) {
   const secret =
     process.env.PAYBRIDGENP_WEBHOOK_SECRET ||
     process.env.PAYBRIDGE_WEBHOOK_SECRET;
-  const signature = request.headers.get('x-paybridgenp-signature');
+  const signature =
+    request.headers.get('x-paybridgenp-signature') ||
+    request.headers.get('x-paybridge-signature');
 
   console.log('🔍 Webhook Debug:', {
     hasSecret: !!secret,
