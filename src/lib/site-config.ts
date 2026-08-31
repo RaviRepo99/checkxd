@@ -1,7 +1,7 @@
 export const SITE_CONFIG = {
   name: 'CCRC IT CLUB',
   fullName: 'Computer Science, Innovation & Information Technology Club',
-  url: 'https://ccrcitclub.com',
+  url: 'https://www.ccrcitclub.com',
   description:
     'Official website of CCRC IT CLUB. Explore events, innovation, AI competitions, workshops, and student projects.',
   tagline: 'Empowering Students. Inspiring Innovation.',

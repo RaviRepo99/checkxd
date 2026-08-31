@@ -4,9 +4,6 @@ import {SITE_CONFIG} from '@/lib/site-config';
 export function getSiteUrl(): string {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '');
   if (fromEnv) return fromEnv;
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
-  }
   return SITE_CONFIG.url.replace(/\/$/, '');
 }
 
