@@ -12,7 +12,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     'Workshops, competitions, and club events from the Computer Science Innovation & Tech Club at CCRC.',
   path: '/events',
-  ogImagePath: '/events/opengraph-image',
+  ogImagePath: '/og-image.png',
 });
 
 export default async function EventsPage() {

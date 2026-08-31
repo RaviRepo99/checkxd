@@ -39,7 +39,7 @@ export async function generateMetadata({
     title: `${member.name} — CCRC IT CLUB Team ${member.memberYear}`,
     description,
     path,
-    ogImagePath: `${path}/opengraph-image`,
+    ogImagePath: '/og-image.png',
   });
 }
 

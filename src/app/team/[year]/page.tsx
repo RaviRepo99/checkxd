@@ -27,7 +27,7 @@ export async function generateMetadata({
     title: `CCRC IT CLUB Team ${yearNum}`,
     description: `Meet the CCRC IT CLUB ${yearNum} roster — board members, executives, and advisors at Nepal College of Information Technology.`,
     path: `/team/${yearNum}`,
-    ogImagePath: `/team/${yearNum}/opengraph-image`,
+    ogImagePath: '/og-image.png',
   });
 }
 

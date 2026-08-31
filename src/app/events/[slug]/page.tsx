@@ -38,7 +38,7 @@ export async function generateMetadata({
     title: event.title,
     description: plain || `${event.title} — ${event.date} at ${event.location}`,
     path: eventPath(event),
-    ogImagePath: `${eventPath(event)}/opengraph-image`,
+    ogImagePath: '/og-image.png',
   });
 }
 

@@ -12,7 +12,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     'Meet CCRC IT CLUB board members, executives, and advisors at CCRC. Browse rosters by academic year.',
   path: '/team',
-  ogImagePath: '/team/opengraph-image',
+  ogImagePath: '/og-image.png',
 });
 
 type PageProps = {
