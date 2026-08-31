@@ -1,6 +1,8 @@
 import {NextResponse} from 'next/server';
 import {PayBridgeNP} from '@paybridge-np/sdk';
-import {getSupabaseAdminClient} from '@/lib/supabase-storage';
+import {db} from '@/db';
+import {donations} from '@/db/schema';
+import {eq} from 'drizzle-orm';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^[0-9+()\-\s]{7,20}$/;
@@ -27,10 +29,7 @@ function getPayBridgeClient() {
 
 async function persistDonation(payload: Record<string, unknown>) {
   try {
-    const {error} = await getSupabaseAdminClient()
-        .from('donations')
-        .insert([payload]);
-    if (error) throw error;
+    await db.insert(donations).values(payload as typeof donations.$inferInsert);
     return {stored: true, error: null};
   } catch (error) {
     console.error(
@@ -43,17 +42,15 @@ async function persistDonation(payload: Record<string, unknown>) {
 
 async function updateDonationStatus(payload: Record<string, unknown>) {
   try {
-    const {error} = await getSupabaseAdminClient()
-        .from('donations')
-        .update({
-          payment_method: payload.payment_method,
-          transaction_id: payload.transaction_id,
-          proof_file_name: payload.proof_file_name,
+    await db.update(donations)
+        .set({
+          paymentMethod: payload.payment_method as string | null,
+          transactionId: payload.transaction_id as string | null,
+          proofFileName: payload.proof_file_name as string | null,
           status: 'confirmed',
-          updated_at: new Date().toISOString(),
+          updatedAt: new Date(),
         })
-        .eq('reference_id', payload.reference_id);
-    if (error) throw error;
+        .where(eq(donations.referenceId, payload.reference_id as string));
     return {stored: true, error: null};
   } catch (error) {
     console.error(
@@ -66,30 +63,33 @@ async function updateDonationStatus(payload: Record<string, unknown>) {
 
 export async function GET() {
   try {
-    const admin = getSupabaseAdminClient();
-    const {data: confirmedDonations, error} = await admin
-        .from('donations')
-        .select('amount')
-        .eq('status', 'confirmed');
-    if (error) throw error;
+    const confirmedDonations = await db.select({
+      amount: donations.amount,
+    })
+      .from(donations)
+      .where(eq(donations.status, 'confirmed'));
     const totalDonations = confirmedDonations.reduce(
         (total, donation) => total + Number(donation.amount || 0),
         0,
     );
 
-    const {data: recentDonors, error: recentError} = await admin
-        .from('donations')
-        .select('full_name, amount, created_at, email, phone')
-        .eq('status', 'confirmed')
-        .order('created_at', {ascending: false})
+    const recentDonors = await db.select({
+      full_name: donations.fullName,
+      amount: donations.amount,
+      created_at: donations.createdAt,
+      email: donations.email,
+      phone: donations.phone,
+    })
+      .from(donations)
+      .where(eq(donations.status, 'confirmed'))
+      .orderBy(donations.createdAt)
         .limit(10);
-    if (recentError) throw recentError;
 
     return NextResponse.json({
       success: true,
       totalDonations,
       donorCount: confirmedDonations.length,
-      recentDonors: recentDonors ?? [],
+      recentDonors: recentDonors.reverse(),
     });
   } catch (error) {
     console.warn('Unable to load donation statistics:', error);
