@@ -2,7 +2,7 @@ import {SITE_CONFIG} from '@/lib/site-config';
 import {getSiteUrl} from '@/lib/seo';
 
 const siteUrl = getSiteUrl();
-const ogImage = `${siteUrl}/og-banner.png`;
+const ogImage = `${siteUrl}/og-image.png`;
 const pageTitle = 'CCRC IT CLUB - Empowering Students. Inspiring Innovation.';
 const pageDescription =
   'Official website of CCRC IT CLUB. Explore events, innovation, AI competitions, workshops, and student projects.';

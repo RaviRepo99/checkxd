@@ -75,5 +75,5 @@ export const defaultSiteMetadata: Metadata = createPageMetadata({
   description:
     'Official website of CCRC IT CLUB. Explore events, innovation, AI competitions, workshops, and student projects.',
   path: '/',
-  ogImagePath: '/og-banner.png',
+  ogImagePath: '/og-image.png',
 });
