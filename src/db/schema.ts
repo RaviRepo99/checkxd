@@ -58,3 +58,21 @@ export const events = pgTable('events', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
+
+export const donations = pgTable('donations', {
+  id: serial('id').primaryKey(),
+  referenceId: text('reference_id').notNull().unique(),
+  fullName: text('full_name').notNull(),
+  email: text('email').notNull(),
+  phone: text('phone').notNull(),
+  address: text('address'),
+  message: text('message'),
+  amount: integer('amount').notNull(),
+  currency: text('currency').default('NPR').notNull(),
+  paymentMethod: text('payment_method'),
+  transactionId: text('transaction_id'),
+  proofFileName: text('proof_file_name'),
+  status: text('status', {enum: ['pending', 'confirmed']}).default('pending').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
