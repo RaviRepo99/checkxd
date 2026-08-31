@@ -1,8 +1,6 @@
 import {NextResponse} from 'next/server';
 import {PayBridgeNP} from '@paybridge-np/sdk';
-import {db} from '@/db';
-import {donations} from '@/db/schema';
-import {eq} from 'drizzle-orm';
+import {getSupabaseAdminClient} from '@/lib/supabase-storage';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^[0-9+()\-\s]{7,20}$/;
@@ -29,61 +27,69 @@ function getPayBridgeClient() {
 
 async function persistDonation(payload: Record<string, unknown>) {
   try {
-    await db.insert(donations).values(payload as typeof donations.$inferInsert);
+    const {error} = await getSupabaseAdminClient()
+        .from('donations')
+        .insert([payload]);
+    if (error) throw error;
     return {stored: true, error: null};
   } catch (error) {
-    console.error('Donation insert failed:', error);
+    console.error(
+        'Donation insert failed:',
+        error instanceof Error ? error.message : JSON.stringify(error),
+    );
     return {stored: false, error};
   }
 }
 
 async function updateDonationStatus(payload: Record<string, unknown>) {
   try {
-    await db.update(donations)
-        .set({
-          paymentMethod: payload.payment_method as string | null,
-          transactionId: payload.transaction_id as string | null,
-          proofFileName: payload.proof_file_name as string | null,
+    const {error} = await getSupabaseAdminClient()
+        .from('donations')
+        .update({
+          payment_method: payload.payment_method,
+          transaction_id: payload.transaction_id,
+          proof_file_name: payload.proof_file_name,
           status: 'confirmed',
-          updatedAt: new Date(),
+          updated_at: new Date().toISOString(),
         })
-        .where(eq(donations.referenceId, payload.reference_id as string));
+        .eq('reference_id', payload.reference_id);
+    if (error) throw error;
     return {stored: true, error: null};
   } catch (error) {
-    console.error('Donation update unavailable:', error);
+    console.error(
+        'Donation update unavailable:',
+        error instanceof Error ? error.message : JSON.stringify(error),
+    );
     return {stored: false, error};
   }
 }
 
 export async function GET() {
   try {
-    const confirmedDonations = await db.select({
-      amount: donations.amount,
-    })
-        .from(donations)
-        .where(eq(donations.status, 'confirmed'));
+    const admin = getSupabaseAdminClient();
+    const {data: confirmedDonations, error} = await admin
+        .from('donations')
+        .select('amount')
+        .eq('status', 'confirmed');
+    if (error) throw error;
     const totalDonations = confirmedDonations.reduce(
         (total, donation) => total + Number(donation.amount || 0),
         0,
     );
 
-    const recentDonors = await db.select({
-      full_name: donations.fullName,
-      amount: donations.amount,
-      created_at: donations.createdAt,
-      email: donations.email,
-      phone: donations.phone,
-    })
-        .from(donations)
-        .where(eq(donations.status, 'confirmed'))
-        .orderBy(donations.createdAt)
+    const {data: recentDonors, error: recentError} = await admin
+        .from('donations')
+        .select('full_name, amount, created_at, email, phone')
+        .eq('status', 'confirmed')
+        .order('created_at', {ascending: false})
         .limit(10);
+    if (recentError) throw recentError;
 
     return NextResponse.json({
       success: true,
       totalDonations,
       donorCount: confirmedDonations.length,
-      recentDonors: recentDonors.reverse(),
+      recentDonors: recentDonors ?? [],
     });
   } catch (error) {
     console.warn('Unable to load donation statistics:', error);

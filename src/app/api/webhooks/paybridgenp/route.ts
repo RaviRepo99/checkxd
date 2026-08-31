@@ -1,8 +1,6 @@
 import {PayBridgeNP} from '@paybridge-np/sdk';
 import {NextResponse} from 'next/server';
-import {db} from '@/db';
-import {donations} from '@/db/schema';
-import {eq} from 'drizzle-orm';
+import {getSupabaseAdminClient} from '@/lib/supabase-storage';
 
 type PayBridgeEvent = {
   id?: string;
@@ -27,15 +25,18 @@ async function updateDonationFromEvent(event: PayBridgeEvent, status: string) {
     return;
   }
 
-  const updated = await db.update(donations)
-      .set({
-        status: status as 'pending' | 'confirmed',
-        paymentMethod: event.data?.provider || null,
-        transactionId: event.data?.provider_ref || event.data?.id || null,
-        updatedAt: new Date(),
+  const {data: updated, error} = await getSupabaseAdminClient()
+      .from('donations')
+      .update({
+        status,
+        payment_method: event.data?.provider || null,
+        transaction_id: event.data?.provider_ref || event.data?.id || null,
+        updated_at: new Date().toISOString(),
       })
-      .where(eq(donations.referenceId, donationId))
-      .returning({referenceId: donations.referenceId});
+      .eq('reference_id', donationId)
+      .select('reference_id');
+
+  if (error) throw error;
 
   if (!updated.length) {
     throw new Error(`No donation found for PayBridge reference ${donationId}.`);
